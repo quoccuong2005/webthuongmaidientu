@@ -1,0 +1,290 @@
+.detailsPage {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+.backBtn:hover {
+  color: var(--primary-color);
+}
+
+.productLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .productLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.imageSection {
+  background: var(--bg-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.mainImage {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.currentCrumb {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-color);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.starIcon {
+  color: var(--warning-color);
+}
+
+.reviewCount {
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 0.25rem;
+}
+
+.separator {
+  color: var(--border-color);
+}
+
+.stock {
+  color: var(--text-muted);
+}
+
+.inStock {
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+.outOfStock {
+  color: var(--danger-color);
+  font-weight: 500;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.price {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--danger-color);
+}
+
+.originalPrice {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.description {
+  color: var(--text-main);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantityPicker {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 50px;
+}
+
+.qBtn {
+  width: 40px;
+  height: 100%;
+  background: var(--bg-color);
+  color: var(--text-main);
+  font-size: 1.25rem;
+}
+.qBtn:hover {
+  background: var(--border-color);
+}
+
+.qInput {
+  width: 60px;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+}
+.qInput::-webkit-inner-spin-button, 
+.qInput::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.addToCartBig {
+  height: 50px;
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.wishlistBtn {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+.reviewsSection {
+  margin-top: 4rem;
+  background: white;
+  padding: 3rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.reviewCard {
+  background: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reviewerAvatar {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.reviewerInfo h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 0.25rem;
+}
+
+.reviewRating {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.reviewComment {
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.noReviews {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.addReviewForm {
+  background: var(--bg-color);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+}
+
+.addReviewForm h3 {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.ratingSelect {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
