@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { user } = useAuth();
-  
+
   const [product, setProduct] = useState(null);
   const [categoryName, setCategoryName] = useState('');
   const [loading, setLoading] = useState(true);
@@ -48,7 +48,7 @@ const ProductDetails = () => {
       return;
     }
     if (!reviewText.trim()) return;
-    
+
     try {
       const updatedProduct = await addReviewAPI(product.id, {
         userId: user.id,
@@ -58,13 +58,13 @@ const ProductDetails = () => {
       });
       setProduct(updatedProduct);
       setReviewText('');
-    } catch (err) {
+    } catch {
       alert("Có lỗi xảy ra khi gửi đánh giá");
     }
   };
 
-  if (loading) return <div className="container" style={{padding: '5rem 0', textAlign: 'center'}}>Đang tải sản phẩm...</div>;
-  if (!product) return <div className="container" style={{padding: '5rem 0', textAlign: 'center'}}>Không tìm thấy sản phẩm.</div>;
+  if (loading) return <div className="container" style={{ padding: '5rem 0', textAlign: 'center' }}>Đang tải sản phẩm...</div>;
+  if (!product) return <div className="container" style={{ padding: '5rem 0', textAlign: 'center' }}>Không tìm thấy sản phẩm.</div>;
 
   return (
     <div className={`container ${styles.detailsPage}`}>
@@ -83,7 +83,7 @@ const ProductDetails = () => {
           </div>
 
           <h1 className={styles.title}>{product.name}</h1>
-          
+
           <div className={styles.meta}>
             <div className={styles.rating}>
               <Star fill="currentColor" size={18} className={styles.starIcon} />
@@ -102,7 +102,7 @@ const ProductDetails = () => {
               </span>
             )}
             {product.originalPrice > product.price && (
-               <span className="badge badge-pending" style={{marginLeft: '1rem'}}>-{Math.round(100 - (product.price/product.originalPrice)*100)}%</span>
+              <span className="badge badge-pending" style={{ marginLeft: '1rem' }}>-{Math.round(100 - (product.price / product.originalPrice) * 100)}%</span>
             )}
           </div>
 
@@ -117,8 +117,8 @@ const ProductDetails = () => {
               <button onClick={() => setQuantity(q => Math.min(product.stock, q + 1))} className={styles.qBtn}>+</button>
             </div>
 
-            <button 
-              className={`btn btn-primary ${styles.addToCartBig}`} 
+            <button
+              className={`btn btn-primary ${styles.addToCartBig}`}
               onClick={handleAddToCart}
               disabled={product.stock === 0}
             >
@@ -136,7 +136,7 @@ const ProductDetails = () => {
       {/* Reviews Section */}
       <div className={styles.reviewsSection}>
         <h2 className={styles.sectionTitle}>Đánh giá sản phẩm</h2>
-        
+
         <div className={styles.reviewsList}>
           {product.reviews && product.reviews.length > 0 ? (
             product.reviews.map(review => (
@@ -156,38 +156,38 @@ const ProductDetails = () => {
               </div>
             ))
           ) : (
-             <p className={styles.noReviews}>Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
+            <p className={styles.noReviews}>Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
           )}
         </div>
 
         {/* Add Review Form */}
         <div className={styles.addReviewForm}>
-           <h3>Thêm đánh giá của bạn</h3>
-           {user ? (
-             <form onSubmit={handleAddReview}>
-               <div className={styles.ratingSelect}>
-                 <span>Đánh giá: </span>
-                 <select value={ratingInput} onChange={e => setRatingInput(Number(e.target.value))} className="input-field" style={{width: 'auto', padding: '0.5rem'}}>
-                   <option value={5}>5 Sao (Tuyệt vời)</option>
-                   <option value={4}>4 Sao (Tốt)</option>
-                   <option value={3}>3 Sao (Bình thường)</option>
-                   <option value={2}>2 Sao (Kém)</option>
-                   <option value={1}>1 Sao (Tệ)</option>
-                 </select>
-               </div>
-               <textarea 
-                 className="input-field" 
-                 rows="4" 
-                 placeholder="Nhận xét của bạn về sản phẩm..."
-                 value={reviewText}
-                 onChange={e => setReviewText(e.target.value)}
-                 style={{marginBottom: '1rem', resize: 'vertical'}}
-               ></textarea>
-               <button type="submit" className="btn btn-primary">Gửi đánh giá</button>
-             </form>
-           ) : (
-             <p>Vui lòng <a href="/login" style={{color: 'var(--primary-color)', fontWeight: '600'}}>đăng nhập</a> để gửi đánh giá.</p>
-           )}
+          <h3>Thêm đánh giá của bạn</h3>
+          {user ? (
+            <form onSubmit={handleAddReview}>
+              <div className={styles.ratingSelect}>
+                <span>Đánh giá: </span>
+                <select value={ratingInput} onChange={e => setRatingInput(Number(e.target.value))} className="input-field" style={{ width: 'auto', padding: '0.5rem' }}>
+                  <option value={5}>5 Sao (Tuyệt vời)</option>
+                  <option value={4}>4 Sao (Tốt)</option>
+                  <option value={3}>3 Sao (Bình thường)</option>
+                  <option value={2}>2 Sao (Kém)</option>
+                  <option value={1}>1 Sao (Tệ)</option>
+                </select>
+              </div>
+              <textarea
+                className="input-field"
+                rows="4"
+                placeholder="Nhận xét của bạn về sản phẩm..."
+                value={reviewText}
+                onChange={e => setReviewText(e.target.value)}
+                style={{ marginBottom: '1rem', resize: 'vertical' }}
+              ></textarea>
+              <button type="submit" className="btn btn-primary">Gửi đánh giá</button>
+            </form>
+          ) : (
+            <p>Vui lòng <a href="/login" style={{ color: 'var(--primary-color)', fontWeight: '600' }}>đăng nhập</a> để gửi đánh giá.</p>
+          )}
         </div>
       </div>
     </div>

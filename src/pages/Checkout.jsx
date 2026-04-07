@@ -37,7 +37,7 @@ const Checkout = () => {
     try {
       setLoading(true);
       setError('');
-      
+
       const orderData = {
         userId: user.id,
         items: cartItems,
@@ -52,16 +52,16 @@ const Checkout = () => {
 
       // Giả lập redirect qua VNPay nếu chọn VNPay
       if (paymentMethod === 'vnpay') {
-         await new Promise(r => setTimeout(r, 1500));
-         alert('Đang chuyển hướng sang cổng thanh toán VNPay (Giả lập)... Giao dịch thành công!');
+        await new Promise(r => setTimeout(r, 1500));
+        alert('Đang chuyển hướng sang cổng thanh toán VNPay (Giả lập)... Giao dịch thành công!');
       }
 
       await createOrderAPI(orderData);
       clearCart();
       alert('Đặt hàng thành công! Mã đơn hàng của bạn đã được ghi nhận.');
       navigate('/');
-      
-    } catch (err) {
+
+    } catch {
       setError('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
     } finally {
       setLoading(false);
@@ -76,13 +76,13 @@ const Checkout = () => {
   return (
     <div className={`container ${styles.checkoutPage}`}>
       <h1 className={styles.pageTitle}>Thanh toán</h1>
-      
+
       <form onSubmit={handleCheckout} className={styles.layout}>
         <div className={styles.leftCol}>
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>Thông tin giao hàng</h2>
             {error && <div className={styles.errorAlert}>{error}</div>}
-            
+
             <div className={styles.formGroup}>
               <label>Họ và tên người nhận</label>
               <input type="text" name="name" className="input-field" value={formData.name} onChange={handleChange} required />
@@ -111,7 +111,7 @@ const Checkout = () => {
                   <p>Phí thu hộ tùy thuộc vào bên vận chuyển (Viettel Post).</p>
                 </div>
               </label>
-              
+
               <label className={`${styles.paymentOption} ${paymentMethod === 'vnpay' ? styles.active : ''}`}>
                 <input type="radio" name="payment" value="vnpay" checked={paymentMethod === 'vnpay'} onChange={() => setPaymentMethod('vnpay')} />
                 <div className={styles.payContent}>
@@ -129,34 +129,34 @@ const Checkout = () => {
             <div className={styles.orderItems}>
               {cartItems.map(item => (
                 <div key={item.productId} className={styles.orderItem}>
-                   <img src={item.image} alt={item.name} className={styles.itemImage} />
-                   <div className={styles.itemDetails}>
-                     <h4>{item.name}</h4>
-                     <p>SL: {item.quantity}</p>
-                   </div>
-                   <div className={styles.itemPrice}>
-                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price * item.quantity)}
-                   </div>
+                  <img src={item.image} alt={item.name} className={styles.itemImage} />
+                  <div className={styles.itemDetails}>
+                    <h4>{item.name}</h4>
+                    <p>SL: {item.quantity}</p>
+                  </div>
+                  <div className={styles.itemPrice}>
+                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price * item.quantity)}
+                  </div>
                 </div>
               ))}
             </div>
-            
+
             <div className={styles.summaryTotals}>
-               <div className={styles.summaryRow}>
-                 <span>Tạm tính</span>
-                 <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(getCartTotal())}</span>
-               </div>
-               <div className={styles.summaryRow}>
-                 <span>Phí giao hàng (Viettel Post)</span>
-                 <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(shippingFee)}</span>
-               </div>
-               <div className={styles.totalRow}>
-                 <span>Tổng thanh toán</span>
-                 <span className={styles.finalPrice}>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPayment)}</span>
-               </div>
+              <div className={styles.summaryRow}>
+                <span>Tạm tính</span>
+                <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(getCartTotal())}</span>
+              </div>
+              <div className={styles.summaryRow}>
+                <span>Phí giao hàng (Viettel Post)</span>
+                <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(shippingFee)}</span>
+              </div>
+              <div className={styles.totalRow}>
+                <span>Tổng thanh toán</span>
+                <span className={styles.finalPrice}>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPayment)}</span>
+              </div>
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{width: '100%', padding: '1rem', fontSize: '1.125rem', marginTop: '1.5rem'}} disabled={loading}>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '1.125rem', marginTop: '1.5rem' }} disabled={loading}>
               {loading ? 'Đang xử lý...' : 'Xác nhận đặt hàng'}
             </button>
           </div>

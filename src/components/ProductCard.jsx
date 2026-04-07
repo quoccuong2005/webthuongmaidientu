@@ -1,41 +1,52 @@
 import { Link } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
+import { Heart, User } from 'lucide-react';
 import styles from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    addToCart(product);
-  };
+  // Format price in VND
+  const formattedPrice = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(product.price);
 
   return (
     <div className={styles.productCard}>
-      <Link to={`/product/${product.id}`} className={styles.imageLink}>
-        <img src={product.image} alt={product.name} className={styles.image} />
-      </Link>
-      
-      <div className={styles.content}>
-        <Link to={`/product/${product.id}`}>
-          <h3 className={styles.title}>{product.name}</h3>
-        </Link>
-        
-        <div className={styles.priceContainer}>
-          <span className={styles.price}>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(product.price / 25000)}</span>
-          {/* Using a rough conversion to USD for aesthetic match to the image */}
+      <Link to={`/product/${product.id}`} className={styles.cardLink}>
+        <div className={styles.imageWrapper}>
+          <img src={product.image} alt={product.name} className={styles.image} />
+          {/* Optional Promoted Badge */}
+          {product.id === 'p1' && <span className={styles.badge}>Tin tiêu biểu</span>}
+          {/* Heart icon top right */}
+          <button
+            className={styles.heartBtn}
+            onClick={(e) => { e.preventDefault(); /* block link navigation */ }}
+            aria-label="Lưu tin"
+          >
+            <Heart size={16} />
+          </button>
         </div>
-      </div>
-      
-      <div className={styles.actionArea}>
-         <button 
-           onClick={handleAddToCart}
-           className={`btn btn-primary ${styles.addToCartBtn}`}
-           disabled={product.stock === 0}
-         >
-           {product.stock === 0 ? 'OUT OF STOCK' : 'ADD TO BAG'}
-         </button>
-      </div>
+
+        <div className={styles.content}>
+          <h3 className={styles.title} title={product.name}>{product.name}</h3>
+
+          <div className={styles.priceContainer}>
+            <span className={styles.price}>{formattedPrice}</span>
+          </div>
+
+          <div className={styles.footer}>
+            <div className={styles.userInfo}>
+              <div className={styles.avatarPlaceholder}>
+                <User size={10} color="#fff" />
+              </div>
+            </div>
+            <div className={styles.metaInfo}>
+              <span>hôm qua</span>
+              <span>·</span>
+              <span>Hà Nội</span>
+            </div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };
